@@ -92,7 +92,7 @@ class Api {
 }
 
 const api = new Api ({
-    baseUrl: 'http://api.mesto.ryabtseva.nomoredomains.sbs',
+    baseUrl: 'https://api.mesto.ryabtseva.nomoredomains.sbs',
     headers: {
       authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
