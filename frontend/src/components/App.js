@@ -137,12 +137,10 @@ function App() {
     function tokenCheck() {
         if (localStorage.getItem('token')) {
             const token = localStorage.getItem('token');
-            console.log(token)
             if (token) {
                 auth.getContent(token)
                     .then((res) => {
                         if (res){
-                            console.log(res);
                             const email = res.user.email;
                             setLoggedIn(true);
                             setUserEmail(email);
@@ -181,8 +179,6 @@ function App() {
         auth.authorize(email, password)
             .then ((data) => {
                 if (data.token) {
-                    console.log(data.token);
-                    api.getToken(data.token);
                     setLoggedIn(true);
                     setUserEmail(email);
                     history.push('/')
