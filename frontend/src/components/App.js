@@ -12,8 +12,8 @@ import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
-import api from '../utils/api.js';
 import * as auth from '../utils/auth.js';
+import api from '../utils/api.js';
 import union from '../images/Union.png';
 import union_err from '../images/Union_error.png';
 
@@ -41,9 +41,7 @@ function App() {
         if (loggedIn){
             api.getProfileInfo()
             .then((data)=> {
-                setCurrentUser(
-                data.user
-                )
+                setCurrentUser(data.user)
             })
             .catch ((err) => {
                     console.log (err);
@@ -139,11 +137,13 @@ function App() {
     function tokenCheck() {
         if (localStorage.getItem('token')) {
             const token = localStorage.getItem('token');
+            console.log(token)
             if (token) {
                 auth.getContent(token)
                     .then((res) => {
                         if (res){
-                            const email = res.user.email
+                            console.log(res);
+                            const email = res.user.email;
                             setLoggedIn(true);
                             setUserEmail(email);
                         }   
@@ -176,11 +176,13 @@ function App() {
             })
             .catch ((err) => console.log(err));
     }
-
+    
     function onAuthorize(email, password) {
         auth.authorize(email, password)
             .then ((data) => {
                 if (data.token) {
+                    console.log(data.token);
+                    api.getToken(data.token);
                     setLoggedIn(true);
                     setUserEmail(email);
                     history.push('/')

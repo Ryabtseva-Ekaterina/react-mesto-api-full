@@ -1,16 +1,25 @@
-const token = localStorage.getItem('token');
+//const token = localStorage.getItem('token');
 
 class Api {
     constructor (options){
         this._baseUrl = options.baseUrl;
-        this._headers = options.headers;
-    }
+        //this._headers = options.headers;
+    } 
      
     handleResponse (res)  {
         if (res.ok) {
             return res.json();
           }
         return Promise.reject(res.status);
+    }
+
+    getToken (token) {
+        console.log(token);
+        this._headers = {
+            authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+        console.log(this._headers); 
     }
 
     getProfileInfo () {
@@ -22,6 +31,7 @@ class Api {
     }
 
     getCards () {
+        console.log(this._headers);
         return fetch (`${this._baseUrl}/cards`, { 
             headers: this._headers})
         .then((res)=>
@@ -93,10 +103,10 @@ class Api {
 
 const api = new Api ({
     baseUrl: 'https://api.mesto.ryabtseva.nomoredomains.sbs',
-    headers: {
-      authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    } 
+    //headers : {
+    //    authorization: `Bearer ${token}`,
+    //    'Content-Type': 'application/json'
+    //}
 });
 
 export default api;
