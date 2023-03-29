@@ -220,6 +220,7 @@ function App() {
                                     component={Main}
                                     userData={userEmail}
                                     onDeleteToken={deleteToken}>
+                                    {!loggedIn ? <Redirect to = '/'/> : <Redirect to= '/movies'/>}
                                 </ProtectedRoute>
 
                             </Switch>
