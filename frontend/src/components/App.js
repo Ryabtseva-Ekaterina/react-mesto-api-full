@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Route, Switch, useHistory} from 'react-router-dom';
+import {Route, Switch, useHistory, Redirect} from 'react-router-dom';
 import Footer from './Footer.js';
 import Main from './Main.js';
 import PopupWithForm from './PopupWithForm.js';
