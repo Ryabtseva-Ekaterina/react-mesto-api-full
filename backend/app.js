@@ -1,12 +1,12 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const bodyParser = require('body-parser');
 const { errors, Joi, celebrate } = require('celebrate');
 const users = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const auth = require('./middlewares/auth');
+const cors = require('./middlewares/corsOptions');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3001 } = process.env;
@@ -16,11 +16,11 @@ const { login, createUser } = require('./controllers/users');
 
 const app = express();
 
-app.use(cors());
+app.use(cors);
 
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27017/mestodb', {
+mongoose.connect(process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : 'mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
 
