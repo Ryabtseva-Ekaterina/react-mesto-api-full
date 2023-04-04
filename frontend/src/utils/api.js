@@ -92,7 +92,7 @@ class Api {
 }
 
 const api = new Api ({
-    baseUrl: 'http://localhost:3001',
+    baseUrl: 'https://react-mesto-api-two.vercel.app',
     headers : {
         authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
